@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory, createMemoryHistory } from 'history';
 import { reducer as formReducer } from 'redux-form';
 
@@ -10,7 +10,7 @@ const history = isWindowUndefined() ? createMemoryHistory() : createBrowserHisto
 const historyMiddleware = routerMiddleware(history);
 
 export const reducers = combineReducers({
-  routing: routerReducer,
+  router: connectRouter(history),
   form: formReducer,
 });
 
