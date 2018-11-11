@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
@@ -25,4 +28,10 @@ class App extends Component {
   }
 }
 
-export default App;
+export default compose(
+  connect(
+    null,
+    {},
+  ),
+  withRouter,
+)(App);
