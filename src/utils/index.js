@@ -1,6 +1,6 @@
-export function isWindowUndefined() {
-  return typeof window === 'undefined';
-}
-export function getWindow() {
-  return isWindowUndefined() ? {} : window;
-}
+export {
+  isWindowUndefined,
+  getWindow,
+  buildApiPath,
+  getStorageItem,
+} from './main';
