@@ -9,7 +9,7 @@ class Homepage extends React.Component {
     return (
       <div>
         <AppHeader />
-        Hello Homepage
+        Homepage
       </div>
     );
   }

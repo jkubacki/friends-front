@@ -2,23 +2,24 @@ import React from 'react'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import LoginForm from 'components/LoginForm';
 
-class AppHeader extends React.Component {
-  render() {
-    return (
-      <div>
-        AppHeader
-        <LoginForm></LoginForm>
-      </div>
-    )
-  }
+import UserSection from 'components/UserSection';
+import LoginForm from 'components/LoginForm';
+import UserState from 'constants/userState';
+
+function AppHeader({ isLoggedIn }) {
+  return (
+    <div>
+      AppHeader
+      {isLoggedIn && <UserSection />}
+      {!isLoggedIn && <LoginForm />}
+    </div>
+  )
 }
 
 export default compose(
-  connect(
-    null,
-    {},
-  ),
   withRouter,
+  connect(({ user }) => ({
+    isLoggedIn: user.state === UserState.LOGGED_IN,
+  })),
 )(AppHeader);
