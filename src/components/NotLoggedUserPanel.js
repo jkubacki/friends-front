@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getLoginPath, getSignupPath } from 'constants/paths';
-import { ModalLink } from 'components/navigation';
 
 class NotLoggedUserPanel extends React.Component {
   render() {

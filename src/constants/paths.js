@@ -1,3 +1,7 @@
+export function getHomePath() {
+  return '/';
+}
+
 export function getLoginPath() {
   return '/login';
 }

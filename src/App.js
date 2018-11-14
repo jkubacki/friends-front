@@ -13,7 +13,7 @@ import { getStorageItem} from 'utils';
 
 import { Route } from 'components/navigation';
 import { Switch } from 'react-router'
-import { getLoginPath, getSignupPath } from 'constants/paths';
+import { getHomePath, getLoginPath, getSignupPath } from 'constants/paths';
 
 import AppHeader from 'components/AppHeader'
 import LoginPage from 'views/LoginPage'
@@ -41,7 +41,7 @@ class App extends Component {
         <AppHeader />
         <Switch>
           <Route
-            path="/"
+            path={getHomePath()}
             exact
             component={Homepage}
           />

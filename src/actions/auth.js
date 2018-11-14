@@ -2,10 +2,14 @@ import { SubmissionError } from 'redux-form';
 import { push } from 'connected-react-router';
 
 import { dispatchRequest } from 'actions';
+import { getHomePath } from 'constants/paths'
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
   GET_MY_USER_REQUEST,
   GET_MY_USER_SUCCESS,
   GET_MY_USER_FAILURE,
@@ -13,6 +17,7 @@ import {
 } from 'actionTypes';
 import {
   sendLoginRequest,
+  sendLogoutRequest,
   requestUserInfo,
 } from 'api/auth';
 
@@ -22,7 +27,7 @@ export function login(params) {
     request: () => sendLoginRequest(params),
     onSuccess: (dispatch, data, getState) => {
       dispatch({ type: LOGIN_SUCCESS, payload: data });
-      dispatch(push('/'));
+      dispatch(push(getHomePath()));
     },
     onFailure: (dispatch, error) => {
       dispatch({ type: LOGIN_FAILURE });
@@ -34,6 +39,18 @@ export function login(params) {
         });
       }
     },
+  });
+}
+
+export function logout() {
+  return dispatchRequest({
+    requestAction: LOGOUT_REQUEST,
+    request: sendLogoutRequest,
+    onSuccess: dispatch => {
+      dispatch(push(getHomePath()));
+      dispatch({ type: LOGOUT_SUCCESS });
+    },
+    onFailure: LOGOUT_FAILURE,
   });
 }
 
