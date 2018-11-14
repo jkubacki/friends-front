@@ -4,9 +4,14 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  GET_MY_USER_REQUEST,
+  GET_MY_USER_SUCCESS,
+  GET_MY_USER_FAILURE,
+  MARK_AS_NOT_LOGGED_USER,
 } from 'actionTypes';
 import {
   sendLoginRequest,
+  requestUserInfo,
 } from 'api/auth';
 
 export function login(params) {
@@ -15,11 +20,6 @@ export function login(params) {
     request: () => sendLoginRequest(params),
     onSuccess: (dispatch, data, getState) => {
       dispatch({ type: LOGIN_SUCCESS, payload: data });
-
-      // visitAfterLogin({
-      //   currentState: getState(),
-      //   dispatch,
-      // });
     },
     onFailure: (dispatch, error) => {
       dispatch({ type: LOGIN_FAILURE });
@@ -32,4 +32,23 @@ export function login(params) {
       }
     },
   });
+}
+
+export function getUserInfo() {
+  return dispatchRequest(
+    {
+      requestAction: GET_MY_USER_REQUEST,
+      request: requestUserInfo,
+      onSuccess: (dispatch, data) => {
+        dispatch({ type: GET_MY_USER_SUCCESS });
+        dispatch({ type: LOGIN_SUCCESS, payload: data });
+      },
+      onFailure: GET_MY_USER_FAILURE,
+    },
+    { returnFailure: true, returnSuccess: true },
+  );
+}
+
+export function markAsNotLoggedUser() {
+  return { type: MARK_AS_NOT_LOGGED_USER };
 }

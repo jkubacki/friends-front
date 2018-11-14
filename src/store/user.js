@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS } from 'actionTypes';
+import { LOGIN_SUCCESS, MARK_AS_NOT_LOGGED_USER } from 'actionTypes';
 import UserState from 'constants/userState';
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
 function loginSuccess(payload) {
   const [userData] = payload;
   const {
-    data: { id: userId, attributes },
+    data: { id: userId },
   } = userData;
 
   return {
@@ -22,6 +22,12 @@ export default function user(state = initialState, { type, payload }) {
   switch (type) {
     case LOGIN_SUCCESS:
       return loginSuccess(payload);
+    case MARK_AS_NOT_LOGGED_USER:
+      return {
+        ...state,
+        id: null,
+        state: UserState.NOT_LOGGED_IN,
+      };
     default:
       return state;
   }
