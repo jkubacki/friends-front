@@ -16,11 +16,6 @@ class App extends Component {
           exact
           component={Homepage}
         />
-        <Route
-          path="/home"
-          exact
-          component={Homepage}
-        />
       </div>
     );
   }
