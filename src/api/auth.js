@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-import { getOauthTokenPath, getOauthRevokePath } from 'constants/apiPaths';
+import { post } from 'api';
+
+import { getOauthTokenPath, getOauthRevokePath, getUsersPath } from 'constants/apiPaths';
 import { LocalStorage, SessionStorage } from 'utils/storage';
 import { getStorageItem } from 'utils';
 import { getUserProfile } from 'api/userProfile';
@@ -79,4 +81,17 @@ export function refreshTokens() {
 
       return response;
     });
+}
+
+export function sendSignUpRequest({
+  username,
+  password,
+  passwordConfirmation,
+}) {
+  return post(getUsersPath(), {
+    'data[type]': 'users',
+    'data[attributes][email]': username,
+    'data[attributes][password]': password,
+    'data[attributes][password_confirmation]': passwordConfirmation,
+  });
 }

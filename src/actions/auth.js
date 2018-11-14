@@ -1,5 +1,5 @@
 import { SubmissionError } from 'redux-form';
-import { push } from 'connected-react-router';
+import { goBack, push } from 'connected-react-router';
 
 import { dispatchRequest } from 'actions';
 import { getHomePath } from 'constants/paths'
@@ -10,15 +10,19 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
   GET_MY_USER_REQUEST,
   GET_MY_USER_SUCCESS,
   GET_MY_USER_FAILURE,
   MARK_AS_NOT_LOGGED_USER,
 } from 'actionTypes';
 import {
+  requestUserInfo,
   sendLoginRequest,
   sendLogoutRequest,
-  requestUserInfo,
+  sendSignUpRequest,
 } from 'api/auth';
 
 export function login(params) {
@@ -71,4 +75,16 @@ export function getUserInfo() {
 
 export function markAsNotLoggedUser() {
   return { type: MARK_AS_NOT_LOGGED_USER };
+}
+
+export function signUp(params) {
+  return dispatchRequest({
+    requestAction: SIGNUP_REQUEST,
+    request: () => sendSignUpRequest(params),
+    onSuccess: dispatch => {
+      dispatch({ type: SIGNUP_SUCCESS });
+      dispatch(goBack());
+    },
+    onFailure: SIGNUP_FAILURE,
+  });
 }
