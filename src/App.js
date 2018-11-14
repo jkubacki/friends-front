@@ -12,6 +12,12 @@ import {
 import { getStorageItem} from 'utils';
 
 import { Route } from 'components/navigation';
+import { Switch } from 'react-router'
+import { getLoginPath, getSignupPath } from 'constants/paths';
+
+import AppHeader from 'components/AppHeader'
+import LoginPage from 'views/LoginPage'
+import SignupPage from 'views/SignupPage'
 
 class App extends Component {
   componentWillMount() {
@@ -32,11 +38,24 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route
-          path="/"
-          exact
-          component={Homepage}
-        />
+        <AppHeader />
+        <Switch>
+          <Route
+            path="/"
+            exact
+            component={Homepage}
+          />
+          <Route
+            path={getLoginPath()}
+            exact
+            component={LoginPage}
+          />
+          <Route
+            path={getSignupPath()}
+            exact
+            component={SignupPage}
+          />
+        </Switch>
       </div>
     );
   }

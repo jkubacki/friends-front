@@ -3,11 +3,13 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-class Homepage extends React.Component {
+import LoginForm from 'components/LoginForm';
+
+class LoginPage extends React.Component {
   render() {
     return (
       <div>
-        Homepage
+        <LoginForm />
       </div>
     );
   }
@@ -19,4 +21,4 @@ export default compose(
     {},
   ),
   withRouter,
-)(Homepage);
+)(LoginPage);

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Fragment} from 'react';
 
 class UserSection extends React.Component {
   render() {
     return (
-      <div>
-        UserSection
-      </div>
+      <Fragment>
+        <li>UserSection</li>
+      </Fragment>
     )
   }
 }

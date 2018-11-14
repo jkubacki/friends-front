@@ -2,18 +2,23 @@ import React from 'react'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import UserSection from 'components/UserSection';
-import LoginForm from 'components/LoginForm';
 import UserState from 'constants/userState';
+import UserSection from 'components/UserSection';
+import NotLoggedUserPanel from 'components/NotLoggedUserPanel';
 
 function AppHeader({ isLoggedIn }) {
   return (
-    <div>
-      AppHeader
-      {isLoggedIn && <UserSection />}
-      {!isLoggedIn && <LoginForm />}
-    </div>
+    <nav>
+      <Link to="/">
+        Home
+      </Link>
+      <ul>
+        {isLoggedIn && <UserSection />}
+        {!isLoggedIn && <NotLoggedUserPanel />}
+      </ul>
+    </nav>
   )
 }
 
