@@ -1,4 +1,6 @@
 import { SubmissionError } from 'redux-form';
+import { push } from 'connected-react-router';
+
 import { dispatchRequest } from 'actions';
 import {
   LOGIN_REQUEST,
@@ -20,6 +22,7 @@ export function login(params) {
     request: () => sendLoginRequest(params),
     onSuccess: (dispatch, data, getState) => {
       dispatch({ type: LOGIN_SUCCESS, payload: data });
+      dispatch(push('/'));
     },
     onFailure: (dispatch, error) => {
       dispatch({ type: LOGIN_FAILURE });
