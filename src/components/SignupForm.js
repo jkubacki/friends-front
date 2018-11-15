@@ -12,7 +12,7 @@ class SignupForm extends React.Component {
     this.props.signUp({
       email: values.email,
       password: values.password,
-      password: values.password_confirmation,
+      password_confirmation: values.password_confirmation,
     });
 
   render() {

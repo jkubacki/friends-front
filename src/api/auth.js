@@ -84,14 +84,14 @@ export function refreshTokens() {
 }
 
 export function sendSignUpRequest({
-  username,
+  email,
   password,
-  passwordConfirmation,
+  password_confirmation,
 }) {
   return post(getUsersPath(), {
     'data[type]': 'users',
-    'data[attributes][email]': username,
+    'data[attributes][email]': email,
     'data[attributes][password]': password,
-    'data[attributes][password_confirmation]': passwordConfirmation,
+    'data[attributes][password_confirmation]': password_confirmation,
   });
 }
