@@ -6,4 +6,5 @@ export const getCurrentUserPath = buildApiPath(() => '/api/v1/users/me');
 export const getUsersPath = buildApiPath(
   id => (id ? `/api/v1/users/${id}` : '/api/v1/users'),
 );
+export const getConfirmEmailPath = buildApiPath(() => '/api/v1/users/confirmations');
 

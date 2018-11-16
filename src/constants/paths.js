@@ -9,3 +9,7 @@ export function getLoginPath() {
 export function getSignupPath() {
   return '/signup';
 }
+
+export function getEmailConfirmationPath() {
+  return '/confirm-email';
+}

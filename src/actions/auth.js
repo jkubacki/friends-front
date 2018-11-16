@@ -2,7 +2,7 @@ import { SubmissionError } from 'redux-form';
 import { goBack, push } from 'connected-react-router';
 
 import { dispatchRequest } from 'actions';
-import { getHomePath } from 'constants/paths'
+import { getHomePath, getLoginPath } from 'constants/paths'
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -17,13 +17,18 @@ import {
   GET_MY_USER_SUCCESS,
   GET_MY_USER_FAILURE,
   MARK_AS_NOT_LOGGED_USER,
+  CONFIRM_EMAIL_REQUEST,
+  CONFIRM_EMAIL_SUCCESS,
+  CONFIRM_EMAIL_FAILURE,
 } from 'actionTypes';
 import {
   requestUserInfo,
   sendLoginRequest,
   sendLogoutRequest,
   sendSignUpRequest,
+  sendEmailConfirmationRequest,
 } from 'api/auth';
+import { RequestError } from 'api/errors';
 
 export function login(params) {
   return dispatchRequest({
@@ -86,5 +91,17 @@ export function signUp(params) {
       dispatch(goBack());
     },
     onFailure: SIGNUP_FAILURE,
+  });
+}
+
+export function confirmEmail(params) {
+  return dispatchRequest({
+    requestAction: CONFIRM_EMAIL_REQUEST,
+    request: () => sendEmailConfirmationRequest(params),
+    onSuccess: (dispatch, data) => {
+      dispatch({ type: CONFIRM_EMAIL_SUCCESS });
+      dispatch(push(getLoginPath()));
+    },
+    onFailure: new RequestError(CONFIRM_EMAIL_FAILURE),
   });
 }

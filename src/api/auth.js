@@ -2,7 +2,12 @@ import axios from 'axios';
 
 import { post } from 'api';
 
-import { getOauthTokenPath, getOauthRevokePath, getUsersPath } from 'constants/apiPaths';
+import {
+  getOauthTokenPath,
+  getOauthRevokePath,
+  getUsersPath,
+  getConfirmEmailPath
+} from 'constants/apiPaths';
 import { LocalStorage, SessionStorage } from 'utils/storage';
 import { getStorageItem } from 'utils';
 import { getUserProfile } from 'api/userProfile';
@@ -93,5 +98,12 @@ export function sendSignUpRequest({
     'data[attributes][email]': email,
     'data[attributes][password]': password,
     'data[attributes][password_confirmation]': password_confirmation,
+  });
+}
+
+export function sendEmailConfirmationRequest({ confirmationToken }) {
+  return post(getConfirmEmailPath(), {
+    'data[type]': 'users',
+    'data[attributes][confirmation_token]': confirmationToken,
   });
 }

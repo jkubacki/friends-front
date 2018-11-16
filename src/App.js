@@ -13,11 +13,17 @@ import { getStorageItem} from 'utils';
 
 import { Route } from 'components/navigation';
 import { Switch } from 'react-router'
-import { getHomePath, getLoginPath, getSignupPath } from 'constants/paths';
+import {
+  getHomePath,
+  getLoginPath,
+  getSignupPath,
+  getEmailConfirmationPath
+} from 'constants/paths';
 
 import AppHeader from 'components/AppHeader'
 import LoginPage from 'views/LoginPage'
 import SignupPage from 'views/SignupPage'
+import EmailConfirmationPage from 'views/EmailConfirmationPage'
 
 class App extends Component {
   componentWillMount() {
@@ -54,6 +60,11 @@ class App extends Component {
             path={getSignupPath()}
             exact
             component={SignupPage}
+          />
+          <Route
+            path={getEmailConfirmationPath()}
+            exact
+            component={EmailConfirmationPage}
           />
         </Switch>
       </div>
