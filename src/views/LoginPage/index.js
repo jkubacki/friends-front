@@ -10,17 +10,19 @@ import { extractProps } from 'utils';
 
 class LoginPage extends React.Component {
   render() {
-    const google_client = '793164866667-ftl6g4gfa12b4oqathoc56gu6kc46gah.apps.googleusercontent.com'
-    const google_scopes = 'profile email https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me'
     const { googleLogin } = this.props;
+    const {
+      REACT_APP_GOOGLE_CLIENT_ID,
+      REACT_APP_GOOGLE_OAUTH_SCOPES,
+    } = process.env;
 
     return (
       <div>
         <LoginForm />
         <GoogleLogin
-          clientId={google_client}
+          clientId={REACT_APP_GOOGLE_CLIENT_ID}
           responseType="code"
-          scope={google_scopes}
+          scope={REACT_APP_GOOGLE_OAUTH_SCOPES}
           onSuccess={googleLogin}
           tag="span"
         />

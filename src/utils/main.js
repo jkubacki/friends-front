@@ -9,7 +9,7 @@ export function getWindow() {
 }
 
 export function buildApiPath(getPathFunction) {
-  const baseUrl = "http://localhost:3000"; // process.env.REACT_APP_API_BASE_URL;
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   return (...args) => `${baseUrl}${getPathFunction(...args)}`;
 }
