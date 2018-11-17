@@ -24,6 +24,7 @@ import {
 import {
   requestUserInfo,
   sendLoginRequest,
+  sendSocialLoginRequest,
   sendLogoutRequest,
   sendSignUpRequest,
   sendEmailConfirmationRequest,
@@ -49,6 +50,21 @@ export function login(params) {
       }
     },
   });
+}
+
+export function socialLogin(params) {
+  return dispatchRequest(
+    {
+      requestAction: LOGIN_REQUEST,
+      request: () => sendSocialLoginRequest(params),
+      onSuccess: (dispatch, data, getState) => {
+        dispatch({ type: LOGIN_SUCCESS, payload: data });
+        dispatch(push(getHomePath()));
+      },
+      onFailure: LOGIN_FAILURE,
+    },
+    { returnSuccess: true, returnFailure: true },
+  );
 }
 
 export function logout() {

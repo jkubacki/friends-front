@@ -1,3 +1,4 @@
+import React from 'react';
 import { LocalStorage, SessionStorage } from 'utils/storage';
 
 export function isWindowUndefined() {
@@ -19,4 +20,10 @@ export function getStorageItem(key) {
   }
 
   return LocalStorage.getItem(key) || SessionStorage.getItem(key);
+}
+
+export function extractProps(propsExtractor) {
+  return PassedComponent => props => (
+    <PassedComponent {...props} {...propsExtractor(props)} />
+  );
 }

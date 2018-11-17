@@ -47,6 +47,14 @@ export function sendLoginRequest(params) {
   });
 }
 
+export function sendSocialLoginRequest(params) {
+  return sendTokenRequest({
+    grant_type: 'assertion',
+    rememberMe: true,
+    ...params,
+  });
+}
+
 export function sendLogoutRequest() {
   const token = getStorageItem('token');
 
